@@ -1,7 +1,7 @@
 class ResizeImageQuery {
-  filename: string | undefined;
-  height: number | undefined;
-  width: number | undefined;
+  filename!: string;
+  height!: number;
+  width!: number;
 }
 
 export default ResizeImageQuery;

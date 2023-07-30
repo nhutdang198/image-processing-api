@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs';
 import sharp from 'sharp';
 
 class ImageServiceClass {
@@ -8,12 +7,18 @@ class ImageServiceClass {
     height: number,
     width: number
   ) => {
-    return await sharp(imagePath).resize(height, width).toFile(newImagePath);
+    const resizeConfig: { height?: number; width?: number } = {
+      height,
+      width
+    };
+    if (!height) {
+      delete resizeConfig.height;
+    }
+    if (!width) {
+      delete resizeConfig.width;
+    }
+    return await sharp(imagePath).resize(resizeConfig).toFile(newImagePath);
   };
-
-  readImage(imagePath: string): Buffer {
-    return readFileSync(imagePath);
-  }
 }
 const imageService = new ImageServiceClass();
 export default imageService;

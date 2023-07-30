@@ -7,14 +7,22 @@ class ImageControllerClass {
   resizeOneImage = async (request: Request, response: Response) => {
     const resizeImageQuery = request.query;
     const { filename = '', height = 0, width = 0 } = resizeImageQuery;
+    const imageExtention: string = '.jpg';
     const imageFolder: string = path.join('static', 'public', 'images');
-    const imagePath: string = path.join(imageFolder, filename + '.jpg');
+    const imagePath: string = path.join(imageFolder, filename + imageExtention);
     let responseImage: string = imagePath;
-    if (height && width) {
+    if (height || width) {
       try {
+        let resizeName: string = '';
+        if (height) {
+          resizeName += '-height-' + height;
+        }
+        if (width) {
+          resizeName += '-width-' + width;
+        }
         const newImagePath: string = path.join(
           imageFolder,
-          filename + '-height-' + height + '-width-' + width + '.jpg'
+          filename + resizeName + imageExtention
         );
         responseImage = newImagePath;
         await imageService.resizeOneImage(

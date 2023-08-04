@@ -2,10 +2,12 @@ import { Request, Response } from 'express';
 import imageService from './image.service';
 import fs from 'fs';
 import path from 'path';
+import { ResizeImageQuery } from './dtos/resize-image-query.dto';
 
 class ImageControllerClass {
   resizeOneImage = async (request: Request, response: Response) => {
-    const resizeImageQuery = request.query;
+    const query = request.query as never;
+    const resizeImageQuery: ResizeImageQuery = query;
     const { filename = '', height = 0, width = 0 } = resizeImageQuery;
     const imageExtention: string = '.jpg';
     const imageFolder: string = path.join('static', 'public', 'images');

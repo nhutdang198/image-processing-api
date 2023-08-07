@@ -26,11 +26,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
+require("dotenv/config");
 const express = __importStar(require("express"));
+const path = __importStar(require("path"));
 const image_route_1 = __importDefault(require("./modules/images/image.route"));
+const redis_1 = require("./common/redis");
+redis_1.redisSerivce.connect();
 const app = express.default();
+app.use('/static', express.static(path.join(__dirname, 'public/images')));
 app.use((request, response, next) => {
-    console.log('logging');
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const second = date.getSeconds();
+    const time = `[${year}/${month}/${day} ${hour}:${minute}:${second}]`;
+    console.log(time + ' ' + request.method + ' ' + request.url);
     next();
 });
 app.use(image_route_1.default);

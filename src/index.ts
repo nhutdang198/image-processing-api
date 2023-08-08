@@ -7,7 +7,7 @@ import imageRouters from './modules/images/image.route';
 import { redisSerivce } from './common/redis';
 
 redisSerivce.connect();
-const app: Express = express.default();
+export const app: Express = express.default();
 app.use('/static', express.static(path.join(__dirname, 'public/images')));
 app.use((request: Request, response: Response, next: NextFunction) => {
   const date = new Date();

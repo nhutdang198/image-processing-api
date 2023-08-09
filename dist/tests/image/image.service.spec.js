@@ -11,7 +11,7 @@ describe('resize image service testing', () => {
         const imagePath = path_1.default.join(imageFolder, 'fjord.jpg');
         const height = 500;
         const width = 500;
-        const newImagePath = path_1.default.join(imageFolder, 'fjord-height-' + height + '-width' + width + '.jpg');
+        const newImagePath = path_1.default.join(imageFolder, 'fjord-height-' + height + '-width-' + width + '.jpg');
         const imageInfo = await image_service_1.default.resizeOneImage(imagePath, newImagePath, height, width);
         expect(imageInfo.format).toBe('jpeg');
         expect(imageInfo.width).toBe(width);

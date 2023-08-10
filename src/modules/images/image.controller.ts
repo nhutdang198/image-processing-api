@@ -6,7 +6,10 @@ import { ResizeImageQuery } from './dtos/resize-image-query.dto';
 import { redisSerivce } from '../../common/redis';
 
 class ImageControllerClass {
-  resizeOneImage = async (request: Request, response: Response) => {
+  resizeOneImage = async (
+    request: Request,
+    response: Response
+  ): Promise<Response> => {
     const query = request.query as never;
     const resizeImageQuery: ResizeImageQuery = query;
     const { filename = '', height = 0, width = 0 } = resizeImageQuery;

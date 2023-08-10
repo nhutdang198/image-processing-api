@@ -6,7 +6,7 @@ class ImageServiceClass {
     newImagePath: string,
     height: number,
     width: number
-  ) => {
+  ): Promise<sharp.OutputInfo> => {
     const resizeConfig: { height?: number; width?: number } = {
       height,
       width
